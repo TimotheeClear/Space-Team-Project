@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Space DIM</string>
+    <string name="dim_space_team">DIM Space Team</string>
+    <string name="choose_your_code_name_for_this_mission">Choose your code-name for this mission...</string>
+    <string name="button">Button</string>
+    <string name="code_name">Code-name...</string>
+    <string name="join">START</string>
+    <string name="if_your_a_new_crewmate">If your a new crewmate</string>
+    <string name="register_as_a_new_agent">REGISTER AS A NEW AGENT</string>
+    <string name="image_of_red_crewmate_from_among_us">image of red crewmate from among us</string>
+    <string name="image_of_blue_crewmate_from_among_us">image of blue crewmate from among us</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainPage">
+
+    <fragment
+        android:id="@+id/mainPage"
+        android:name="com.example.spacedim.MainPage"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPage_to_getReady"
+            app:destination="@id/getReady" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinACrew"
+        android:name="com.example.spacedim.JoinACrew"
+        android:label="fragment_join_a_crew"
+        tools:layout="@layout/fragment_join_a_crew" >
+        <action
+            android:id="@+id/action_joinACrew_to_game"
+            app:destination="@id/game" />
+    </fragment>
+    <fragment
+        android:id="@+id/getReady"
+        android:name="com.example.spacedim.GetReady"
+        android:label="fragment_get_ready"
+        tools:layout="@layout/fragment_get_ready" >
+        <action
+            android:id="@+id/action_getReady_to_joinACrew"
+            app:destination="@id/joinACrew" />
+    </fragment>
+    <fragment
+        android:id="@+id/game"
+        android:name="com.example.spacedim.Game"
+        android:label="Game" >
+        <action
+            android:id="@+id/action_game_to_win"
+            app:destination="@id/win" />
+        <action
+            android:id="@+id/action_game_to_lose"
+            app:destination="@id/lose" />
+    </fragment>
+    <fragment
+        android:id="@+id/win"
+        android:name="com.example.spacedim.win"
+        android:label="win" >
+        <action
+            android:id="@+id/action_win_to_mainPage"
+            app:destination="@id/mainPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/lose"
+        android:name="com.example.spacedim.lose"
+        android:label="lose" >
+        <action
+            android:id="@+id/action_lose_to_mainPage"
+            app:destination="@id/mainPage" />
+    </fragment>
+</navigation>
