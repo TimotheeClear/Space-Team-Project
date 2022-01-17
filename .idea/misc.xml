@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_connection.xml" value="0.1" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_get_ready.xml" value="0.1" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_join_a_crew.xml" value="0.1" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_lose.xml" value="0.1" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_main_page.xml" value="0.2" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_name.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_sign_up.xml" value="0.1657848324514991" />
+        <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/Space-Team-Project/app/src/main/res/layout/fragment_win.xml" value="0.1" />
         <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/SpaceDIM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/SpaceDIM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/zoordokiir/AndroidStudioProjects/SpaceDIM/app/src/main/res/drawable/shaperound.xml" value="0.19907407407407407" />

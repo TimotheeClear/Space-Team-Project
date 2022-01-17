@@ -19,9 +19,14 @@ class MainPage : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentMainPageBinding>(inflater,
             R.layout.fragment_main_page,container,false)
 
-       binding.joinButton.setOnClickListener{view : View ->
+       binding.joinButton.setOnClickListener { view: View ->
            view.findNavController().navigate(R.id.action_mainPage_to_getReady)
        }
+        binding.buttonRegister.setOnClickListener{view : View ->
+            view.findNavController().navigate(R.id.action_mainPage_to_getReady)
+        }
+
+
         setHasOptionsMenu(true)
 
         return binding.root
