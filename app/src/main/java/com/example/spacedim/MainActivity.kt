@@ -40,4 +40,7 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         Log.i("MainPage", "onStop called")
     }
+
+
+
 }
