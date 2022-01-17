@@ -32,8 +32,8 @@ class MainPageViewModel : ViewModel(){
             // findUser est un methode Suspend car elle asyncronne, chaque action s'execute à la fin de la précédente
             try {
                 val result = Api.retrofitService.findUser(pseudo)
-                //on assigne une nouvelle valeur à user
                 _user.value = result.body()
+
             } catch (e: Exception) {
                 _user.value = null
             }
@@ -44,10 +44,11 @@ class MainPageViewModel : ViewModel(){
         viewModelScope.launch {
             try {
                 val result = Api.retrofitService.logUser(id)
+                Log.i("truc", "Réussite connection")
                 _userConected.value = result.body()
             } catch (e: Exception) {
+                Log.i("truc", "Echec connection")
                 _userConected.value = null
-
             }
         }
     }

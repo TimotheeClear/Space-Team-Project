@@ -41,16 +41,25 @@ class MainPage : Fragment() {
         viewModel.user.observe(this, {
             it?.let{ user ->
                 Log.i("truc", user.toString())
+                //appelle la fonction pour connecter un User au serveur
+                viewModel.connectUser(user.id)
 
-/*
-                this.findNavController().navigate(R.id.action_mainPage_to_getReady)
-*/
             } ?: run {
                 val input = binding.codeName.getText().toString()
-                if ( input == "")
-                    Toast.makeText(context, "Veuillez choisir un pseudo.", Toast.LENGTH_LONG).show()
-                else
-                    Toast.makeText(context, "Pseudo inconnue, veuillez vous enregistrer.", Toast.LENGTH_LONG).show()
+                if ( input == ""){
+                    Toast.makeText(context, "Veuillez choisir un pseudo", Toast.LENGTH_LONG).show()
+                    Log.i("truc", "Veuillez choisir un pseudo")
+                }
+                else{
+                    Toast.makeText(context, "Pseudo inconnue, veuillez vous enregistrer", Toast.LENGTH_LONG).show()
+                    Log.i("truc", "Pseudo inconnue, veuillez vous enregistrer")
+                }
+            }
+        })
+
+        viewModel.userConnected.observe(this,{
+            it?.let{user ->
+                this.findNavController().navigate(R.id.action_mainPage_to_getReady)
             }
         })
 
@@ -59,9 +68,6 @@ class MainPage : Fragment() {
            val pseudo : String = binding.codeName.getText().toString()
             //lancement de getFindUser qui modifie la liveData user
            viewModel.getFindUser(pseudo)
-           /*val idPseudo = Api.retrofitService.findUser(pseudo).execute()
-           idPseudo.body()?.let { user ->*/
-           /*}*/
         }
         setHasOptionsMenu(true)
 
