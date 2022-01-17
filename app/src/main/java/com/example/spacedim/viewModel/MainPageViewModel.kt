@@ -1,6 +1,7 @@
 package com.example.spacedim.viewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,10 +15,13 @@ import retrofit2.Response
 
 class MainPageViewModel : ViewModel(){
 
-    private val _response = MutableLiveData<User?>()
+    private val _user = MutableLiveData<User?>()
+    val user: LiveData<User?>
+        get() = _user
 
-    val response: LiveData<User?>
-        get() = _response
+    private val _userConected = MutableLiveData<User?>()
+    val userConnected: LiveData<User?>
+        get() = _userConected
 
     init {}
 
@@ -28,10 +32,21 @@ class MainPageViewModel : ViewModel(){
             // findUser est un methode Suspend car elle asyncronne, chaque action s'execute à la fin de la précédente
             try {
                 val result = Api.retrofitService.findUser(pseudo)
-                //on assigne une nouvelle valeur à response
-                _response.value = result.body()
+                //on assigne une nouvelle valeur à user
+                _user.value = result.body()
             } catch (e: Exception) {
-                _response.value = null
+                _user.value = null
+            }
+        }
+    }
+
+    fun connectUser(id : Int) {
+        viewModelScope.launch {
+            try {
+                val result = Api.retrofitService.logUser(id)
+                _userConected.value = result.body()
+            } catch (e: Exception) {
+                _userConected.value = null
 
             }
         }

@@ -46,6 +46,9 @@ interface ApiService {
 
     @GET("user/find/{name}")
     suspend fun findUser(@Path("name") name : String ): Response<User>
+
+    @GET("user/{id}")
+    suspend fun logUser(@Path("id") id : Int ): Response<User>
 }
 
 object Api {

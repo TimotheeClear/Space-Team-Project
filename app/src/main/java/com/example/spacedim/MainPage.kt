@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.android.spacedim.network.Api
 import com.example.spacedim.databinding.FragmentMainPageBinding
 import com.example.spacedim.network.User
@@ -35,51 +37,34 @@ class MainPage : Fragment() {
         //création viewModel de type MainPageViewModel
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
 
-        //obeserver sur la livedata response
-        viewModel.response.observe(this, {
+        //obeserver sur la livedata user
+        viewModel.user.observe(this, {
             it?.let{ user ->
                 Log.i("truc", user.toString())
-                /*view.findNavController().navigate(R.id.action_mainPage_to_getReady)*/
+
+/*
+                this.findNavController().navigate(R.id.action_mainPage_to_getReady)
+*/
+            } ?: run {
+                val input = binding.codeName.getText().toString()
+                if ( input == "")
+                    Toast.makeText(context, "Veuillez choisir un pseudo.", Toast.LENGTH_LONG).show()
+                else
+                    Toast.makeText(context, "Pseudo inconnue, veuillez vous enregistrer.", Toast.LENGTH_LONG).show()
             }
         })
 
         //detect l'interaction avec le bouton
         binding.joinButton.setOnClickListener{view : View ->
            val pseudo : String = binding.codeName.getText().toString()
-            //lancement de getFindUser qui modifie la liveData response
+            //lancement de getFindUser qui modifie la liveData user
            viewModel.getFindUser(pseudo)
            /*val idPseudo = Api.retrofitService.findUser(pseudo).execute()
            idPseudo.body()?.let { user ->*/
            /*}*/
-/*
-*/
         }
         setHasOptionsMenu(true)
 
         return binding.root
     }
-
-    private val client = OkHttpClient()
-
-    fun identifyUser(pseudo : String) {
-        Log.i("method", "identifyUser" )
-    }
-
-    fun connectUser(id : Int){
-        Log.i("method", "connectUser" )
-
-    }
-
-/*    private fun getFindUser(pseudo : String) {
-        Api.retrofitService.findUser(pseudo).enqueue(
-            object: Callback<User> {
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.i("Truc","Failure: " + t.message)
-                }
-
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    Log.i("Truc","Success: ${response.body()}")
-                }
-            })
-    }*/
 }
