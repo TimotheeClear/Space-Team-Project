@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.spacedim.network.Api
@@ -27,22 +28,19 @@ import java.io.IOException
 import com.example.spacedim.viewModel.MainPageViewModel
 
 class MainPage : Fragment() {
-    private lateinit var viewModel: MainPageViewModel
+    private val sharedViewModel: MainPageViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentMainPageBinding>(inflater, R.layout.fragment_main_page,container,false)
 
-        //création viewModel de type MainPageViewModel
-        viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
-
         //obeserver sur la livedata user
-        viewModel.findUser.observe(this, {
+        sharedViewModel.findUser.observe(this, {
             it?.let{ user ->
                 Log.i("truc", user.toString())
                 //appelle la fonction pour connecter un User au serveur
-                viewModel.connectUser(user.id)
+                sharedViewModel.connectUser(user.id)
 
             } ?: run {
                 val input = binding.codeName.getText().toString()
@@ -57,7 +55,7 @@ class MainPage : Fragment() {
             }
         })
 
-        viewModel.user.observe(this,{
+        sharedViewModel.user.observe(this,{
             it?.let{user ->
                 this.findNavController().navigate(R.id.action_mainPage_to_getReady)
             }
@@ -67,7 +65,7 @@ class MainPage : Fragment() {
         binding.joinButton.setOnClickListener{view : View ->
            val pseudo : String = binding.codeName.getText().toString()
             //lancement de getFindUser qui modifie la liveData user
-           viewModel.getFindUser(pseudo)
+            sharedViewModel.getFindUser(pseudo)
         }
 
         binding.buttonRegister.setOnClickListener{view : View ->

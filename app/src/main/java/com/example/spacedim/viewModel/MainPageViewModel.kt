@@ -64,8 +64,8 @@ class MainPageViewModel : ViewModel() {
     var client = OkHttpClient()
     var ws : WebSocket? = null
 
-    fun start(roomName : String, userId : Int?) {
-        val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/JOIN/"+roomName+"/"+userId.toString()).build()
+    fun start(roomName : String, userId : Int) {
+        val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/ws/join/"+roomName+"/"+userId.toString()).build()
         val listener = EchoWebSocketListener()
         ws = client.newWebSocket(request, listener)
     }
