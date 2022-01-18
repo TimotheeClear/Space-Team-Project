@@ -26,8 +26,11 @@ class GetReady : Fragment() {
 
         binding.joinAGameButton.setOnClickListener{view : View ->
 
-            viewModel.start()
-            /*view.findNavController().navigate(R.id.action_getReady_to_joinACrew)*/
+            val roomName : String = binding.inputTextRoomName.getText().toString()
+            viewModel.user.value?.let{
+                viewModel.start(roomName, it.id)
+                /*view.findNavController().navigate(R.id.action_getReady_to_joinACrew)*/
+            }
         }
         setHasOptionsMenu(true)
 
