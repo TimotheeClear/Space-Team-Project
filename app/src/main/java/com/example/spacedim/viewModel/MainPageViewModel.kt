@@ -7,11 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.spacedim.network.Api
-<<<<<<< HEAD
+
 import com.example.spacedim.UserPost
-=======
+
 import com.example.spacedim.EchoWebSocketListener
->>>>>>> eef803fc32ee7cbafc9ce9d646144a3825fec774
+
 import com.example.spacedim.network.User
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -65,7 +65,7 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
-<<<<<<< HEAD
+
     fun register_User(userPost: UserPost) {
         viewModelScope.launch {
             try {
@@ -78,8 +78,7 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
-=======
->>>>>>> eef803fc32ee7cbafc9ce9d646144a3825fec774
+
 
     var client = OkHttpClient()
     var ws : WebSocket? = null
