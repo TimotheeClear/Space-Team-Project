@@ -6,25 +6,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.spacedim.databinding.FragmentGameBinding
 import com.example.spacedim.databinding.FragmentJoinACrewBinding
+import com.example.spacedim.network.User
+import com.example.spacedim.UserAdapter
+/*import com.example.spacedim.network.UserAdapter*/
 import com.example.spacedim.viewModel.MainPageViewModel
 
 
 class JoinACrew : Fragment() {
     private val sharedViewModel: MainPageViewModel by activityViewModels()
 
+    /**/
+    lateinit var monRecycler: RecyclerView
+/**/
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentJoinACrewBinding>(inflater,
-            R.layout.fragment_join_a_crew,container,false)
+        val binding = DataBindingUtil.inflate<FragmentJoinACrewBinding>(inflater, R.layout.fragment_join_a_crew,container,false)
+        /**/
+        val listUsers = ArrayList<User>()
+        listUsers.add(User(123, "Truc","", 0, State.WAITING))
 
+        monRecycler = binding.userRecyclerView
+        monRecycler.layoutManager = LinearLayoutManager(context)
+        monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){
+            Toast.makeText(context,"Vous avez sélectionné ${it.name}", Toast.LENGTH_SHORT).show()
+        }
+/**/
         binding.joinAGameButton2.setOnClickListener{view : View ->
             sharedViewModel.ready()
         /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/

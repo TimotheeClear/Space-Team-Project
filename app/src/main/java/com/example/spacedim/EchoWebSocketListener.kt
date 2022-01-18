@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
+
 class EchoWebSocketListener : WebSocketListener() {
     private val NORMAL_CLOSURE_STATUS: Int = 1000;
 
@@ -15,6 +16,9 @@ class EchoWebSocketListener : WebSocketListener() {
     override fun onMessage(webSocket: WebSocket, text: String) {
         super.onMessage(webSocket, "Receiving : " + text)
         Log.i("WebSocket", "Receiving : " + text)
+/*
+        val response = PolymoObject.adapter.fromJson(text)
+*/
     }
 
     override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
