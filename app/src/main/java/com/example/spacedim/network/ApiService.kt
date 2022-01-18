@@ -17,17 +17,15 @@
 
 package com.example.android.spacedim.network
 
+import com.example.spacedim.UserPost
 import com.example.spacedim.network.User
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.http.GET
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 private const val BASE_URL = "http://spacedim.async-agency.com:8081/api/"
 
@@ -49,6 +47,9 @@ interface ApiService {
 
     @GET("user/{id}")
     suspend fun logUser(@Path("id") id : Int ): Response<User>
+
+    @POST("user/register")
+    suspend fun registerUser(@Body userPost: UserPost): Response<UserPost>
 }
 
 object Api {

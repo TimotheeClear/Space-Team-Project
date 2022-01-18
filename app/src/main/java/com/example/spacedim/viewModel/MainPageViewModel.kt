@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.spacedim.network.Api
+import com.example.spacedim.UserPost
 import com.example.spacedim.network.User
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -15,6 +16,7 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
 import okio.ByteString.Companion.decodeHex
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,7 +61,18 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
-
+    fun register_User(userPost: UserPost) {
+        viewModelScope.launch {
+            try {
+                val result = Api.retrofitService.registerUser( userPost )
+                Log.i("UserPost", "Réussite enregistrement")
+            } catch (e: Exception) {
+                Log.i("UserPost", e.toString())
+                Log.i("UserPost","Erreur de connexion")
+                Log.i("UserPost", userPost.toString())
+            }
+        }
+    }
 
     var client = OkHttpClient()
 
