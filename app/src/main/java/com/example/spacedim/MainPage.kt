@@ -38,7 +38,7 @@ class MainPage : Fragment() {
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
 
         //obeserver sur la livedata user
-        viewModel.user.observe(this, {
+        viewModel.findUser.observe(this, {
             it?.let{ user ->
                 Log.i("truc", user.toString())
                 //appelle la fonction pour connecter un User au serveur
@@ -68,6 +68,10 @@ class MainPage : Fragment() {
            val pseudo : String = binding.codeName.getText().toString()
             //lancement de getFindUser qui modifie la liveData user
            viewModel.getFindUser(pseudo)
+        }
+
+        binding.buttonRegister.setOnClickListener{view : View ->
+            view.findNavController().navigate(R.id.action_mainPage_to_signUp)
         }
         setHasOptionsMenu(true)
 
