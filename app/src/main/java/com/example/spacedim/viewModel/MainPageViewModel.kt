@@ -26,7 +26,7 @@ class MainPageViewModel : ViewModel() {
         get() = _findUser
 
     private val _user = MutableLiveData<User?>()
-    val userConnected: LiveData<User?>
+    val user: LiveData<User?>
         get() = _user
 
     init {

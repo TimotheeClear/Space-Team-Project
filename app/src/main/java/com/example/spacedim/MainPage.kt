@@ -57,7 +57,7 @@ class MainPage : Fragment() {
             }
         })
 
-        viewModel.userConnected.observe(this,{
+        viewModel.user.observe(this,{
             it?.let{user ->
                 this.findNavController().navigate(R.id.action_mainPage_to_getReady)
             }
