@@ -3,7 +3,6 @@ package com.example.spacedim
 import androidx.leanback.widget.Action
 import com.example.spacedim.network.User
 
-class event {
     enum class EventType() {
         GAME_STARTED(), GAME_OVER(), ERROR(), READY(), NEXT_ACTION(),
         NEXT_LEVEL(), WAITING_FOR_PLAYER(), PLAYER_ACTION()
@@ -19,5 +18,3 @@ class event {
         data class Ready(val value: Boolean) : Event(EventType.READY)
         data class PlayerAction(val uiElement: UIElement): Event(EventType.PLAYER_ACTION)
     }
-
-}
