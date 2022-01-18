@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.spacedim.databinding.FragmentGameBinding
 import com.example.spacedim.databinding.FragmentJoinACrewBinding
+import com.example.spacedim.viewModel.MainPageViewModel
 
 
 class JoinACrew : Fragment() {
+    private val sharedViewModel: MainPageViewModel by activityViewModels()
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +26,8 @@ class JoinACrew : Fragment() {
             R.layout.fragment_join_a_crew,container,false)
 
         binding.joinAGameButton2.setOnClickListener{view : View ->
-            view.findNavController().navigate(R.id.action_joinACrew_to_game)
+            sharedViewModel.ready()
+        /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/
         }
         setHasOptionsMenu(true)
 

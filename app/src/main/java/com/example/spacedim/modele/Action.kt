@@ -1,4 +1,6 @@
-package com.example.spacedim
+package com.example.spacedim.modele
+
+import com.example.spacedim.UIElement
 
 data class Action(
     val sentence: String,

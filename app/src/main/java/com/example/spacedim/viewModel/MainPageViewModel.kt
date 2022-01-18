@@ -7,7 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.spacedim.network.Api
+<<<<<<< HEAD
 import com.example.spacedim.UserPost
+=======
+import com.example.spacedim.EchoWebSocketListener
+>>>>>>> eef803fc32ee7cbafc9ce9d646144a3825fec774
 import com.example.spacedim.network.User
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -28,7 +32,7 @@ class MainPageViewModel : ViewModel() {
         get() = _findUser
 
     private val _user = MutableLiveData<User?>()
-    val userConnected: LiveData<User?>
+    val user: LiveData<User?>
         get() = _user
 
     init {
@@ -41,10 +45,10 @@ class MainPageViewModel : ViewModel() {
             // findUser est un methode Suspend car elle asyncronne, chaque action s'execute à la fin de la précédente
             try {
                 val result = Api.retrofitService.findUser(pseudo)
-                _findUser.value = result.body()
+                _findUser.postValue(result.body())
 
             } catch (e: Exception) {
-                _findUser.value = null
+                _findUser.postValue(null)
             }
         }
     }
@@ -54,13 +58,14 @@ class MainPageViewModel : ViewModel() {
             try {
                 val result = Api.retrofitService.logUser(id)
                 Log.i("truc", "Réussite connection")
-                _user.value = result.body()
+                _user.postValue(result.body())
             } catch (e: Exception) {
                 Log.i("truc", "Echec connection")
-                _user.value = null
+                _user.postValue(null)
             }
         }
     }
+<<<<<<< HEAD
     fun register_User(userPost: UserPost) {
         viewModelScope.launch {
             try {
@@ -73,37 +78,19 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
+=======
+>>>>>>> eef803fc32ee7cbafc9ce9d646144a3825fec774
 
     var client = OkHttpClient()
-
-    private class EchoWebSocketListener : WebSocketListener() {
-        private val NORMAL_CLOSURE_STATUS: Int = 1000;
-
-        override fun onOpen(webSocket: WebSocket, response: okhttp3.Response) {
-            Log.i("truc", "open")
-        }
-
-        override fun onMessage(webSocket: WebSocket, text: String) {
-            super.onMessage(webSocket, "Receiving : " + text)
-            Log.i("truc", "Receiving : " + text)
-        }
-
-        override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
-            super.onMessage(webSocket, "Receiving bytes : " + bytes)
-            Log.i("truc", "Receiving bytes : " + bytes)
-        }
-
-        override fun onFailure(webSocket: WebSocket, t: Throwable, response: okhttp3.Response?) {
-            super.onFailure(webSocket, t, response)
-            Log.i("truc","Error")
-        }
-    }
-
     var ws : WebSocket? = null
 
-    fun start() {
-        val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/ws").build()
+    fun start(roomName : String, userId : Int) {
+        val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/ws/join/"+roomName+"/"+userId.toString()).build()
         val listener = EchoWebSocketListener()
         ws = client.newWebSocket(request, listener)
+    }
+
+    fun ready(){
+        ws?.send("{\"type\":\"READY\", \"value\":true}")
     }
 }
