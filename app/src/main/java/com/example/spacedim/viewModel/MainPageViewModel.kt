@@ -69,4 +69,8 @@ class MainPageViewModel : ViewModel() {
         val listener = EchoWebSocketListener()
         ws = client.newWebSocket(request, listener)
     }
+
+    fun ready(){
+        ws?.send("{\"type\":\"READY\", \"value\":true}")
+    }
 }
