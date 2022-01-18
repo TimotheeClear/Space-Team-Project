@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.example.spacedim.databinding.FragmentWinBinding
+import com.example.spacedim.databinding.FragmentSignUpBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,11 +26,11 @@ class SignUp : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentWinBinding>(inflater,
+        val binding = DataBindingUtil.inflate<FragmentSignUpBinding>(inflater,
             R.layout.fragment_sign_up,container,false)
 
-        binding.button.setOnClickListener{view : View ->
-            view.findNavController().navigate(R.id.action_win_to_mainPage)
+        binding.joinButton.setOnClickListener{view : View ->
+            view.findNavController().navigate(R.id.action_signUp_to_mainPage)
         }
         setHasOptionsMenu(true)
 
