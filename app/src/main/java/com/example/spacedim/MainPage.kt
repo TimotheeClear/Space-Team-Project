@@ -38,7 +38,7 @@ class MainPage : Fragment() {
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
 
         //obeserver sur la livedata user
-        viewModel.user.observe(this, {
+        viewModel.findUser.observe(this, {
             it?.let{ user ->
                 Log.i("truc", user.toString())
                 //appelle la fonction pour connecter un User au serveur
