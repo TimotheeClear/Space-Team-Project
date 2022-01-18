@@ -15,13 +15,13 @@ import retrofit2.Response
 
 class MainPageViewModel : ViewModel(){
 
-    private val _user = MutableLiveData<User?>()
-    val user: LiveData<User?>
-        get() = _user
+    private val _findUser = MutableLiveData<User?>()
+    val findUser: LiveData<User?>
+        get() = _findUser
 
-    private val _userConected = MutableLiveData<User?>()
+    private val _user = MutableLiveData<User?>()
     val userConnected: LiveData<User?>
-        get() = _userConected
+        get() = _user
 
     init {}
 
@@ -32,10 +32,10 @@ class MainPageViewModel : ViewModel(){
             // findUser est un methode Suspend car elle asyncronne, chaque action s'execute à la fin de la précédente
             try {
                 val result = Api.retrofitService.findUser(pseudo)
-                _user.value = result.body()
+                _findUser.value = result.body()
 
             } catch (e: Exception) {
-                _user.value = null
+                _findUser.value = null
             }
         }
     }
@@ -45,10 +45,10 @@ class MainPageViewModel : ViewModel(){
             try {
                 val result = Api.retrofitService.logUser(id)
                 Log.i("truc", "Réussite connection")
-                _userConected.value = result.body()
+                _user.value = result.body()
             } catch (e: Exception) {
                 Log.i("truc", "Echec connection")
-                _userConected.value = null
+                _user.value = null
             }
         }
     }

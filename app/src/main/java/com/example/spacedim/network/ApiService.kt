@@ -41,8 +41,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService {
     @GET("users")
-    fun getUsers():
-            Call<List<User>>
+    fun getUsers(): Call<List<User>>
 
     @GET("user/find/{name}")
     suspend fun findUser(@Path("name") name : String ): Response<User>
