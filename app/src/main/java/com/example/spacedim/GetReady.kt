@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -16,8 +17,7 @@ import com.example.spacedim.viewModel.MainPageViewModel
 class GetReady : Fragment() {
     private lateinit var viewModel: MainPageViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentGetReadyBinding>(inflater,
             R.layout.fragment_get_ready,container,false)
@@ -27,9 +27,13 @@ class GetReady : Fragment() {
         binding.joinAGameButton.setOnClickListener{view : View ->
 
             val roomName : String = binding.inputTextRoomName.getText().toString()
-            viewModel.user.value?.let{
-                viewModel.start(roomName, it.id)
-                /*view.findNavController().navigate(R.id.action_getReady_to_joinACrew)*/
+            if (roomName != "") {
+                viewModel.user.value?.let {
+                    viewModel.start(roomName, it.id)
+                    view.findNavController().navigate(R.id.action_getReady_to_joinACrew)
+                }
+            } else {
+                Toast.makeText(context, "Veuillez choisir un nom de room", Toast.LENGTH_LONG).show()
             }
         }
         setHasOptionsMenu(true)
