@@ -69,6 +69,10 @@ class MainPage : Fragment() {
             //lancement de getFindUser qui modifie la liveData user
            viewModel.getFindUser(pseudo)
         }
+
+        binding.buttonRegister.setOnClickListener{view : View ->
+            view.findNavController().navigate(R.id.action_mainPage_to_signUp)
+        }
         setHasOptionsMenu(true)
 
         return binding.root
