@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.spacedim.databinding.FragmentGetReadyBinding
+import com.example.spacedim.viewModel.MainPageViewModel
 
 
 class GetReady : Fragment() {
+    private lateinit var viewModel: MainPageViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -19,8 +22,12 @@ class GetReady : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentGetReadyBinding>(inflater,
             R.layout.fragment_get_ready,container,false)
 
+        viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
+
         binding.joinAGameButton.setOnClickListener{view : View ->
-            view.findNavController().navigate(R.id.action_getReady_to_joinACrew)
+
+            viewModel.start()
+            /*view.findNavController().navigate(R.id.action_getReady_to_joinACrew)*/
         }
         setHasOptionsMenu(true)
 

@@ -38,13 +38,12 @@
             android:id="@+id/joinAGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JOIN A CREW"
+            android:text="@string/buttonJoinRoom"
             app:layout_constraintBottom_toBottomOf="@+id/inputTextRoomName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.411"
+            app:layout_constraintHorizontal_bias="0.388"
             app:layout_constraintStart_toEndOf="@+id/inputTextRoomName"
-            app:layout_constraintTop_toTopOf="@+id/inputTextRoomName"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/inputTextRoomName" />
 
         <EditText
             android:id="@+id/inputTextRoomName"
@@ -52,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:ems="10"
+            android:hint="@string/inputNameRoom"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textIntro3"
@@ -63,13 +62,11 @@
             android:id="@+id/buttonCreateRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:text="Create a Room"
-            app:layout_constraintBottom_toBottomOf="@+id/inputTextRoomName"
+            android:layout_marginTop="8dp"
+            android:text="@string/createRoomButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toEndOf="@+id/inputTextRoomName"
-            app:layout_constraintTop_toBottomOf="@+id/joinAGameButton" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputTextRoomName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
 </layout>
