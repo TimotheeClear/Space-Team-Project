@@ -38,26 +38,34 @@
             android:id="@+id/joinAGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/buttonJoinRoom"
             app:layout_constraintBottom_toBottomOf="@+id/inputTextRoomName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.388"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/inputTextRoomName"
-            app:layout_constraintTop_toTopOf="@+id/inputTextRoomName" />
+            app:layout_constraintTop_toTopOf="@+id/inputTextRoomName"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/inputTextRoomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:backgroundTint="@color/white"
             android:ems="10"
             android:hint="@string/inputNameRoom"
             android:inputType="textPersonName"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/joinAGameButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textIntro3" />
+            app:layout_constraintTop_toBottomOf="@+id/textIntro3"
+            app:layout_constraintVertical_bias="0.25" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
