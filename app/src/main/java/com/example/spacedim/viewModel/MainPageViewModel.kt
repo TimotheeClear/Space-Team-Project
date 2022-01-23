@@ -10,6 +10,7 @@ import com.example.android.spacedim.network.Api
 import com.example.spacedim.UserPost
 
 import com.example.spacedim.EchoWebSocketListener
+import com.example.spacedim.State
 
 import com.example.spacedim.network.User
 import kotlinx.coroutines.awaitAll
@@ -60,7 +61,6 @@ class MainPageViewModel : ViewModel() {
     }
 
     fun register_User(userPost: UserPost) {
-
         viewModelScope.launch {
             try {
                 val result = Api.retrofitService.registerUser( userPost )
@@ -72,10 +72,17 @@ class MainPageViewModel : ViewModel() {
                 Log.i("UserPost", userPost.toString())
                 registerUserStatus.postValue(false)
             }
-
         }
+    }
 
-
+    fun readyUser() {
+        viewModelScope.launch {
+            if (_user.value?.state == State.WAITING) {
+                _user.value!!.state = State.READY
+            } else {
+                _user.value!!.state = State.WAITING
+            }
+        }
     }
 }
 

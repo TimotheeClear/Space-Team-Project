@@ -1,5 +1,7 @@
 package com.example.spacedim
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,11 +29,13 @@ class JoinACrew : Fragment() {
 
     lateinit var monRecycler: RecyclerView
 
+    @SuppressLint("ResourceAsColor", "UseCompatLoadingForColorStateLists")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentJoinACrewBinding>(inflater, R.layout.fragment_join_a_crew,container,false)
         /**/
+        binding.titreRoom.text = wsViewModel.roomName.value.toString()
 
 
         var listUsers = ArrayList<User>()
@@ -42,23 +46,22 @@ class JoinACrew : Fragment() {
             }
             monRecycler = binding.userRecyclerView
             monRecycler.layoutManager = LinearLayoutManager(context)
-            monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){
-                Toast.makeText(context,"Vous avez sélectionné ${it.name}", Toast.LENGTH_SHORT).show()
-            }
+            monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){}
         })
 
         monRecycler = binding.userRecyclerView
         monRecycler.layoutManager = LinearLayoutManager(context)
-        monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){
-            Toast.makeText(context,"Vous avez sélectionné ${it.name}", Toast.LENGTH_SHORT).show()
-        }
-/**/
+        monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){}
+
         binding.joinAGameButton2.setOnClickListener{view : View ->
+            sharedViewModel.readyUser()
             sharedViewModel.user.value?.state?.let{
-                if( it == State.READY)
+                if(it == State.READY) {
                     wsViewModel.ws?.send("{\"type\":\"READY\", \"value\":false}")
-                else
+                }
+                else{
                     wsViewModel.ws?.send("{\"type\":\"READY\", \"value\":true}")
+                }
             }
             wsViewModel.listener.eventGameStarted.observe(this, { retour ->
                 view?.findNavController()?.navigate(R.id.action_joinACrew_to_game)
