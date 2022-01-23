@@ -55,7 +55,9 @@ class JoinACrew : Fragment() {
 /**/
         binding.joinAGameButton2.setOnClickListener{view : View ->
             wsViewModel.ready()
-        /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/
+            wsViewModel.listener.eventGameStarted.observe(this, { retour ->
+                view?.findNavController()?.navigate(R.id.action_joinACrew_to_game)
+            })
         }
         setHasOptionsMenu(true)
 
