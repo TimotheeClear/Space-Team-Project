@@ -44,54 +44,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TableLayout
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="80dp"
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/game_grid"
+            android:layout_width="329dp"
+            android:layout_height="349dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBar">
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/game1"
+                android:name="com.example.spacedim.game1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="0"
+                app:layout_column="0" />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/game2"
+                android:name="com.example.spacedim.game2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="0"
+                app:layout_column="1"
+                />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/game3"
+                android:name="com.example.spacedim.game3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="0"
+                />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/game4"
+                android:name="com.example.spacedim.game4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="1"
+                />
+        </androidx.gridlayout.widget.GridLayout>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="175dp" >
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/game1"
-                    android:name="com.example.spacedim.game1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/game3"
-                    android:name="com.example.spacedim.game3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="175dp" >
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/game4"
-                    android:name="com.example.spacedim.game4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/game2"
-                    android:name="com.example.spacedim.game2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-
-        </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
