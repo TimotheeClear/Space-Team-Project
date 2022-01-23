@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.android.spacedim.network.ApiService
 import com.example.spacedim.databinding.FragmentSignUpBinding
 import com.example.spacedim.network.User
 import com.example.spacedim.viewModel.MainPageViewModel
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +41,19 @@ class SignUp : Fragment() {
             val name_register : String = binding.codeName.getText().toString()
             val user_register = UserPost(name_register)
             viewModel.register_User(user_register)
-            view.findNavController().navigate(R.id.action_signUp_to_mainPage)
+            viewModel.registerUserStatus.observe(this, Observer {
+                if( viewModel.registerUserStatus.value.toString() == "true") {
+                    Toast.makeText(context, "Utilisateur créé!", Toast.LENGTH_LONG).show()
+                    view.findNavController().navigate(R.id.action_signUp_to_mainPage)
+                }
+                else {
+                    Toast.makeText(context, "Echec de Connexion", Toast.LENGTH_LONG).show()
+                    view.findNavController().navigate(R.id.action_signUp_to_mainPage)
+                }
+
+            })
+
+
         }
         setHasOptionsMenu(true)
 
@@ -74,3 +90,4 @@ class SignUp : Fragment() {
         Log.i("SignUp", "onDetach called")
     }
 }
+

@@ -13,6 +13,7 @@ import com.example.spacedim.UserPost
 import com.example.spacedim.EchoWebSocketListener
 
 import com.example.spacedim.network.User
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -26,7 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainPageViewModel : ViewModel() {
-
+    val registerUserStatus = MutableLiveData<Boolean>();
     private val _findUser = MutableLiveData<User?>()
     val findUser: LiveData<User?>
         get() = _findUser
@@ -67,16 +68,22 @@ class MainPageViewModel : ViewModel() {
     }
 
     fun register_User(userPost: UserPost) {
+
         viewModelScope.launch {
             try {
                 val result = Api.retrofitService.registerUser( userPost )
                 Log.i("UserPost", "Réussite enregistrement")
+                registerUserStatus.postValue(true)
             } catch (e: Exception) {
                 Log.i("UserPost", e.toString())
                 Log.i("UserPost","Erreur de connexion")
                 Log.i("UserPost", userPost.toString())
+                registerUserStatus.postValue(false)
             }
+
         }
+
+
     }
 
 
