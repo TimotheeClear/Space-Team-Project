@@ -8,8 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="50sp"
+        android:layout_margin="8sp"
         android:animateLayoutChanges="false"
         android:background="@drawable/shaperound">
 
@@ -18,7 +18,7 @@
             android:id="@+id/state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32sp"
             android:text="Is ready"
             android:textColor="#00CCE4"
             android:textSize="24sp"
@@ -31,7 +31,7 @@
             android:id="@+id/mainName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="32sp"
             android:ellipsize="none"
             android:text="Simon"
             android:textColor="#FFFFFF"
