@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.gridlayout.widget.GridLayout
@@ -54,7 +53,7 @@ class Game : Fragment() {
     private fun createButton(elementsList : List<UIElement>, binding: FragmentGameBinding) {
         elementsList.forEach {
 
-            var grid: GridLayout = binding.gameGrid
+            var grid: GridLayout = binding.gameGridLayout
 
             when (it.uiType) {
                 UIType.BUTTON -> {
@@ -67,22 +66,21 @@ class Game : Fragment() {
                     }
                     grid.addView(viewButton)
                 }
-            }
+
+    UIType.SWITCH -> {
+        val viewSwitch = layoutInflater.inflate(R.layout.fragment_game2, grid, false)
+        val switch : Switch = viewSwitch.findViewById(R.id.switch_action)
+        switch.text = it.content
+        switch.setOnClickListener{ view : View ->
+            wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
+            // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
         }
+        grid.addView(viewSwitch)
     }
-/*UIType.SWITCH -> {
-    val viewSwitch = layoutInflater.inflate(R.layout.switch_game_button, grid, false)
-    val switch : Switch = viewSwitch.findViewById(R.id.switchAction)
-    switch.text = it.content
-    switch.setOnClickListener{ view : View ->
-        wsViewModel.ws.send(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
-        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
-    }
-    grid.addView(viewSwitch)
 }
 }
 }
-}*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
