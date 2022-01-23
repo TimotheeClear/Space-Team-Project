@@ -60,6 +60,9 @@ class JoinACrew : Fragment() {
                 else
                     wsViewModel.ws?.send("{\"type\":\"READY\", \"value\":true}")
             }
+            wsViewModel.listener.eventGameStarted.observe(this, { retour ->
+                view?.findNavController()?.navigate(R.id.action_joinACrew_to_game)
+            })
         /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/
         }
         setHasOptionsMenu(true)
