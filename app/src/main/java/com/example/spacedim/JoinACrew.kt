@@ -54,7 +54,12 @@ class JoinACrew : Fragment() {
         }
 /**/
         binding.joinAGameButton2.setOnClickListener{view : View ->
-            wsViewModel.ready()
+            sharedViewModel.user.value?.state?.let{
+                if( it == State.READY)
+                    wsViewModel.ws?.send("{\"type\":\"READY\", \"value\":false}")
+                else
+                    wsViewModel.ws?.send("{\"type\":\"READY\", \"value\":true}")
+            }
         /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/
         }
         setHasOptionsMenu(true)
