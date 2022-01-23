@@ -16,10 +16,15 @@ class WSViewModel : ViewModel() {
     lateinit var ws : WebSocket
     lateinit var listener: EchoWebSocketListener;
 
+    private val _roomName = MutableLiveData<String>()
+    val roomName: LiveData<String>
+        get() = _roomName
+
     fun start(roomName : String, userId : Int) {
         val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/ws/join/"+roomName+"/"+userId.toString()).build()
         listener = EchoWebSocketListener()
         ws = client.newWebSocket(request, listener)
+        _roomName.postValue(roomName)
     }
 }
 
