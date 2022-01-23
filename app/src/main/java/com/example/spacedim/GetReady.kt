@@ -17,6 +17,7 @@ import com.example.spacedim.viewModel.MainPageViewModel
 
 class GetReady : Fragment() {
     private val sharedViewModel: MainPageViewModel by activityViewModels()
+    private val wsViewModel: WSViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -28,7 +29,7 @@ class GetReady : Fragment() {
             val roomName : String = binding.inputTextRoomName.getText().toString()
             if (roomName != "") {
                 sharedViewModel.user.value?.let {
-                    sharedViewModel.start(roomName, it.id)
+                    wsViewModel.start(roomName, it.id)
                     view.findNavController().navigate(R.id.action_getReady_to_joinACrew)
                 }
             } else {
