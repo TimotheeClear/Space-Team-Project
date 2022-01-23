@@ -18,23 +18,34 @@ import com.example.spacedim.network.User
 import com.example.spacedim.UserAdapter
 /*import com.example.spacedim.network.UserAdapter*/
 import com.example.spacedim.viewModel.MainPageViewModel
+import okhttp3.WebSocketListener
 
 
 class JoinACrew : Fragment() {
     private val sharedViewModel: MainPageViewModel by activityViewModels()
+    private val wsViewModel: WSViewModel by activityViewModels()
 
-    /**/
     lateinit var monRecycler: RecyclerView
-/**/
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentJoinACrewBinding>(inflater, R.layout.fragment_join_a_crew,container,false)
         /**/
-        val listUsers = ArrayList<User>()
-        listUsers.add(User(123, "Truc","", 0, State.WAITING))
+
+
+        var listUsers = ArrayList<User>()
+        wsViewModel.listener.eventWaitingForPlayers.observe(this, { retour ->
+            listUsers = ArrayList<User>()
+            retour.userList.forEach {
+                listUsers.add(it)
+            }
+            monRecycler = binding.userRecyclerView
+            monRecycler.layoutManager = LinearLayoutManager(context)
+            monRecycler.adapter = UserAdapter(listUsers.toTypedArray()){
+                Toast.makeText(context,"Vous avez sélectionné ${it.name}", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         monRecycler = binding.userRecyclerView
         monRecycler.layoutManager = LinearLayoutManager(context)
@@ -43,7 +54,7 @@ class JoinACrew : Fragment() {
         }
 /**/
         binding.joinAGameButton2.setOnClickListener{view : View ->
-            sharedViewModel.ready()
+            wsViewModel.ready()
         /*view.findNavController().navigate(R.id.action_joinACrew_to_game)*/
         }
         setHasOptionsMenu(true)

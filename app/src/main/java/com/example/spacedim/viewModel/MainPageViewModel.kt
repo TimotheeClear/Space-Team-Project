@@ -1,7 +1,6 @@
 package com.example.spacedim.viewModel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,13 +16,6 @@ import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
-import okhttp3.WebSocketListener
-import okio.ByteString
-import okio.ByteString.Companion.decodeHex
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainPageViewModel : ViewModel() {
 
@@ -78,18 +70,5 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
-
-
-    var client = OkHttpClient()
-    var ws : WebSocket? = null
-
-    fun start(roomName : String, userId : Int) {
-        val request: Request = Request.Builder().url("ws://spacedim.async-agency.com:8081/ws/join/"+roomName+"/"+userId.toString()).build()
-        val listener = EchoWebSocketListener()
-        ws = client.newWebSocket(request, listener)
-    }
-
-    fun ready(){
-        ws?.send("{\"type\":\"READY\", \"value\":true}")
-    }
 }
+

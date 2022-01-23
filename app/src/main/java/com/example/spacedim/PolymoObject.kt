@@ -3,10 +3,13 @@ package com.example.spacedim
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.example.spacedim.modele.Event
+import com.example.spacedim.modele.EventType
+import com.squareup.moshi.JsonAdapter
 
 object PolymoObject {
 
-    private val moshi : Moshi = Moshi.Builder()
+    private val moshiSerializer : Moshi = Moshi.Builder()
         .add(
             PolymorphicJsonAdapterFactory.of(Event::class.java,"type")
                 .withSubtype(Event.NextAction::class.java, EventType.NEXT_ACTION.name)
@@ -20,5 +23,6 @@ object PolymoObject {
         )
         .add(KotlinJsonAdapterFactory())
         .build()
-    val adapter = moshi.adapter(Event::class.java)
+
+    val adapter: JsonAdapter<Event> = moshiSerializer.adapter(Event::class.java)
 }
