@@ -51,39 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar">
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/game1"
-                android:name="com.example.spacedim.game1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_row="0"
-                app:layout_column="0" />
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/game2"
-                android:name="com.example.spacedim.game2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_row="0"
-                app:layout_column="1"
-                />
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/game3"
-                android:name="com.example.spacedim.game3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_row="1"
-                app:layout_column="0"
-                />
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/game4"
-                android:name="com.example.spacedim.game4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_row="1"
-                app:layout_column="1"
-                />
-        </androidx.gridlayout.widget.GridLayout>
+            app:layout_constraintTop_toBottomOf="@+id/progressBar"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

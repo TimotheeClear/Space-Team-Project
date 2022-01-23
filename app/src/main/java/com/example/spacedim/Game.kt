@@ -6,14 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.gridlayout.widget.GridLayout
 import androidx.navigation.findNavController
 import com.example.spacedim.databinding.FragmentGameBinding
 import com.example.spacedim.databinding.FragmentMainPageBinding
+import com.example.spacedim.modele.Event
+import com.example.spacedim.modele.UIElement
+import com.example.spacedim.modele.UIType
 
 
 class Game : Fragment() {
-
+    private val wsViewModel: WSViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +29,7 @@ class Game : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentGameBinding>(inflater,
             R.layout.fragment_game,container,false)
 
-        binding.game1.setOnClickListener{view : View ->
+        /*binding.game1.setOnClickListener{view : View ->
             view.findNavController().navigate(R.id.action_game_to_win)
         }
         binding.game2.setOnClickListener{view : View ->
@@ -33,12 +40,49 @@ class Game : Fragment() {
         }
         binding.game4.setOnClickListener{view : View ->
             view.findNavController().navigate(R.id.action_game_to_lose)
-        }
+        }*/
         setHasOptionsMenu(true)
+
+        wsViewModel.listener.eventGameStarted.observe(viewLifecycleOwner, { gameStarted ->
+            createButton(gameStarted.uiElementList , binding)
+        })
 
         Log.i("game", "onCreateView called")
         return binding.root
     }
+
+    private fun createButton(elementsList : List<UIElement>, binding: FragmentGameBinding) {
+        elementsList.forEach {
+
+            var grid: GridLayout = binding.gameGrid
+
+            when (it.uiType) {
+                UIType.BUTTON -> {
+                    val viewButton = layoutInflater.inflate(R.layout.fragment_game1, grid, false)
+                    val btn: Button = viewButton.findViewById(R.id.emergency_button)
+                    btn.text = it.content
+                    btn.setOnClickListener { view: View ->
+                        wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
+                        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                    }
+                    grid.addView(viewButton)
+                }
+            }
+        }
+    }
+/*UIType.SWITCH -> {
+    val viewSwitch = layoutInflater.inflate(R.layout.switch_game_button, grid, false)
+    val switch : Switch = viewSwitch.findViewById(R.id.switchAction)
+    switch.text = it.content
+    switch.setOnClickListener{ view : View ->
+        wsViewModel.ws.send(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+    }
+    grid.addView(viewSwitch)
+}
+}
+}
+}*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
