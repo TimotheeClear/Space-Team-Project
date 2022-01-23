@@ -14,5 +14,6 @@
     <string name="inputNameRoom">Nom de la room</string>
     <string name="buttonJoinRoom">Rejoindre</string>
     <string name="createRoomButton">Créer</string>
+    <string name="create_a_crew_or_join_one">Create a crew or join one</string>
 
 </resources>
