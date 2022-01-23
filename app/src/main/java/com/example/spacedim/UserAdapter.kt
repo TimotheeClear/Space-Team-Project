@@ -18,7 +18,6 @@ class UserAdapter(val displayedUsers : Array<User>, val listener: (User) -> Unit
     override fun getItemCount(): Int = displayedUsers.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("XXX","onBindViewHolder")
         holder.bind(displayedUsers[position],listener)
     }
 
@@ -26,7 +25,6 @@ class UserAdapter(val displayedUsers : Array<User>, val listener: (User) -> Unit
     {
         fun bind(user: User, listener: (User) -> Unit) = with(itemView)
         {
-            Log.i("XXX","bind")
             findViewById<TextView>(R.id.mainName).text = user.name
             findViewById<TextView>(R.id.state).text = user.state.toString()
             setOnClickListener { listener(user) }
