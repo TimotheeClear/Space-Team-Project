@@ -78,7 +78,7 @@ class MainPageViewModel : ViewModel() {
         viewModelScope.launch {
             if (_user.value?.state == State.WAITING) {
                 _user.value!!.state = State.READY
-            } else if(_user.value?.state == State.READY) {
+            } else {
                 _user.value!!.state = State.WAITING
             }
         }

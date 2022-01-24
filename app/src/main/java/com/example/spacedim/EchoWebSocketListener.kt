@@ -82,7 +82,25 @@ class EchoWebSocketListener() : WebSocketListener() {
                     is Event.GameOver -> _eventGameEnded.postValue(response)
                     is Event.NextLevel -> _eventNextLevel.postValue(response)
                     is Event.WaitingForPlayer -> _eventWaitingForPlayers.postValue(response)
+                }/*
+                if (response is Event.GameStarted) {
+                    _eventGoToPlay.postValue(true)
                 }
+                if (response is Event.GameStarted) {
+                    _eventGameStarted.postValue(response)
+                }
+                if (response is Event.NextAction) {
+                    _eventNextAction.postValue(response)
+                }
+                if (response is Event.GameOver) {
+                    _eventGameEnded.postValue(response)
+                }
+                if (response is Event.NextLevel) {
+                    _eventNextLevel.postValue(response)
+                }
+                if(response is Event.WaitingForPlayer) {
+                    _eventWaitingForPlayers.postValue(response)
+                }*/
             }
         } catch (exception: Exception) {
             Log.i("WebSocket", "error websocket")
