@@ -107,6 +107,9 @@ class Game : Fragment() {
                     if(it.id == 2){
                         image.setImageResource(R.drawable.bombe)
                     }
+                    if(it.id == 5){
+                        image.setImageResource(R.drawable._2)
+                    }
 
                     image.setOnClickListener { view: View ->
                         wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
