@@ -72,9 +72,18 @@ class EchoWebSocketListener() : WebSocketListener() {
         try {
             val response = PolymoObject.adapter.fromJson(text)
 
-
             response?.let {
-                if (response is Event.GameStarted) {
+                when (response){
+                    is Event.GameStarted -> {
+                        _eventGoToPlay.postValue(true)
+                        _eventGameStarted.postValue(response)
+                    }
+                    is Event.NextAction -> _eventNextAction.postValue(response)
+                    is Event.GameOver -> _eventGameEnded.postValue(response)
+                    is Event.NextLevel -> _eventNextLevel.postValue(response)
+                    is Event.WaitingForPlayer -> _eventWaitingForPlayers.postValue(response)
+                }
+                /*if (response is Event.GameStarted) {
                     _eventGoToPlay.postValue(true)
                 }
                 if (response is Event.GameStarted) {
@@ -91,7 +100,7 @@ class EchoWebSocketListener() : WebSocketListener() {
                 }
                 if(response is Event.WaitingForPlayer) {
                     _eventWaitingForPlayers.postValue(response)
-                }
+                }*/
             }
         } catch (exception: Exception) {
             Log.i("WebSocket", "error websocket")

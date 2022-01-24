@@ -40,7 +40,6 @@ class MainPageViewModel : ViewModel() {
             try {
                 val result = Api.retrofitService.findUser(pseudo)
                 _findUser.postValue(result.body())
-
             } catch (e: Exception) {
                 _findUser.postValue(null)
             }
@@ -51,10 +50,10 @@ class MainPageViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = Api.retrofitService.logUser(id)
-                Log.i("truc", "Réussite connection")
+                Log.i("connexion", "Réussite connection")
                 _user.postValue(result.body())
             } catch (e: Exception) {
-                Log.i("truc", "Echec connection")
+                Log.i("connexion", "Echec connection")
                 _user.postValue(null)
             }
         }
@@ -79,7 +78,7 @@ class MainPageViewModel : ViewModel() {
         viewModelScope.launch {
             if (_user.value?.state == State.WAITING) {
                 _user.value!!.state = State.READY
-            } else {
+            } else if(_user.value?.state == State.READY) {
                 _user.value!!.state = State.WAITING
             }
         }

@@ -30,9 +30,11 @@ class GetReady : Fragment() {
             if (roomName != "") {
                 sharedViewModel.user.value?.let {
                     wsViewModel.start(roomName, it.id)
+                    Log.i("getReady", "join room")
                     view.findNavController().navigate(R.id.action_getReady_to_joinACrew)
                 }
             } else {
+                Log.i("getReady", "erreur join room")
                 Toast.makeText(context, "Veuillez choisir un nom de room", Toast.LENGTH_LONG).show()
             }
         }
