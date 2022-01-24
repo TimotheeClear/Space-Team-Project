@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Space DIM</string>
     <string name="dim_space_team">DIM Space Sim</string>
-    <string name="choose_your_code_name_for_this_mission">Choose your code-name for this mission...</string>
+    <string name="choose_your_code_name_for_this_mission">Choose your code-name for this mission…</string>
     <string name="button">Button</string>
-    <string name="code_name">Code-name...</string>
+    <string name="code_name">Code-name…</string>
     <string name="join">START</string>
     <string name="if_you_are_a_new_crewmate">if you are a new crewmate</string>
     <string name="register_as_a_new_agent">REGISTER AS A NEW AGENT</string>
@@ -14,6 +14,13 @@
     <string name="inputNameRoom">Nom de la room</string>
     <string name="buttonJoinRoom">Rejoindre</string>
     <string name="createRoomButton">Créer</string>
-    <string name="create_a_crew_or_join_one">Create a crew or join one</string>
+    <string name="create_a_crew_or_join_one">Type the name of your crew</string>
+    <string name="joinRoomLabel">The game will start when everyone is ready !</string>
+    <string name="readyButton">I\'M READY</string>
+    <string name="looseTxt">GAME OVER</string>
+    <string name="winTxt">To the infinite and beyond !!!</string>
+    <string name="yourScoreLabel">Your score is:</string>
+    <string name="yourBestScore">Highest score:</string>
+    <string name="signUpButton">Sign up</string>
 
 </resources>

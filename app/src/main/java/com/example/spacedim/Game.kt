@@ -51,35 +51,61 @@ class Game : Fragment() {
     }
 
     private fun createButton(elementsList : List<UIElement>, binding: FragmentGameBinding) {
+
         elementsList.forEach {
+
 
             var grid: GridLayout = binding.gameGridLayout
 
+
             when (it.uiType) {
                 UIType.BUTTON -> {
-                    val viewButton = layoutInflater.inflate(R.layout.fragment_game1, grid, false)
+                    /*val viewButton = layoutInflater.inflate(R.layout.fragment_game1, grid, false)
                     val btn: Button = viewButton.findViewById(R.id.emergency_button)
                     btn.text = it.content
+
                     btn.setOnClickListener { view: View ->
                         wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
+                        Log.i("gameTest", it.toString())
+                        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                    }
+                    grid.addView(viewButton)*/
+
+                    val viewButton = layoutInflater.inflate(R.layout.fragment_game3, grid, false)
+                    val image: ImageView = viewButton.findViewById(R.id.button_image)
+                    val text: TextView = viewButton.findViewById(R.id.button_text)
+                    //image. = "@drawable/emergency_button"
+                    text.text = it.content
+
+                    if(it.id == 4){
+                        image.setImageResource(R.drawable.doc)
+                    }
+                    if(it.id == 2){
+                        image.setImageResource(R.drawable.bombe)
+                    }
+
+                    image.setOnClickListener { view: View ->
+                        wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
+                        Log.i("gameTest", it.toString())
                         // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
                     }
                     grid.addView(viewButton)
                 }
 
-    UIType.SWITCH -> {
-        val viewSwitch = layoutInflater.inflate(R.layout.fragment_game2, grid, false)
-        val switch : Switch = viewSwitch.findViewById(R.id.switch_action)
-        switch.text = it.content
-        switch.setOnClickListener{ view : View ->
-            wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
-            // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                UIType.SWITCH -> {
+                    val viewSwitch = layoutInflater.inflate(R.layout.fragment_game2, grid, false)
+                    val switch : Switch = viewSwitch.findViewById(R.id.switch_action)
+                    switch.text = it.content
+                    switch.setOnClickListener{ view : View ->
+                        wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
+                        Log.i("gameTest", it.toString())
+                        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                    }
+                    grid.addView(viewSwitch)
+                }
+            }
         }
-        grid.addView(viewSwitch)
     }
-}
-}
-}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
