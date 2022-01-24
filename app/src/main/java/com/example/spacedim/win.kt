@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.spacedim.databinding.FragmentJoinACrewBinding
 import com.example.spacedim.databinding.FragmentWinBinding
@@ -14,7 +16,7 @@ import com.example.spacedim.databinding.FragmentWinBinding
 
 class win : Fragment() {
 
-
+    private val wsViewModel: WSViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,9 +28,15 @@ class win : Fragment() {
             view.findNavController().navigate(R.id.action_win_to_mainPage)
         }
         setHasOptionsMenu(true)
-
+        var elScore : TextView = binding.winFinalScore
+        wsViewModel.listener.eventGameEnded.observe(viewLifecycleOwner,{gameEnded ->
+            var scoreText : TextView =elScore.findViewById(R.id.winFinalScore)
+            scoreText.text = gameEnded.score.toString()
+        })
         Log.i("win", "onCreateView called")
         return binding.root
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
