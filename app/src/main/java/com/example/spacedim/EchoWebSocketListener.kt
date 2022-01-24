@@ -35,9 +35,9 @@ class EchoWebSocketListener() : WebSocketListener() {
     val state: LiveData<Boolean>
         get() = _state
 
-    private val _eventGoToPlay = MutableLiveData<Boolean>()
+    /*private val _eventGoToPlay = MutableLiveData<Boolean>()
     val eventGoToPlay: LiveData<Boolean>
-        get() = _eventGoToPlay
+        get() = _eventGoToPlay*/
 
     private val _eventGameStarted = MutableLiveData<Event.GameStarted>()
     val eventGameStarted: LiveData<Event.GameStarted>
@@ -72,35 +72,14 @@ class EchoWebSocketListener() : WebSocketListener() {
         try {
             val response = PolymoObject.adapter.fromJson(text)
 
-            response?.let {
+            response?.let { response ->
                 when (response){
-                    is Event.GameStarted -> {
-                        _eventGoToPlay.postValue(true)
-                        _eventGameStarted.postValue(response)
-                    }
+                    is Event.GameStarted -> _eventGameStarted.postValue(response)
                     is Event.NextAction -> _eventNextAction.postValue(response)
                     is Event.GameOver -> _eventGameEnded.postValue(response)
                     is Event.NextLevel -> _eventNextLevel.postValue(response)
                     is Event.WaitingForPlayer -> _eventWaitingForPlayers.postValue(response)
-                }/*
-                if (response is Event.GameStarted) {
-                    _eventGoToPlay.postValue(true)
                 }
-                if (response is Event.GameStarted) {
-                    _eventGameStarted.postValue(response)
-                }
-                if (response is Event.NextAction) {
-                    _eventNextAction.postValue(response)
-                }
-                if (response is Event.GameOver) {
-                    _eventGameEnded.postValue(response)
-                }
-                if (response is Event.NextLevel) {
-                    _eventNextLevel.postValue(response)
-                }
-                if(response is Event.WaitingForPlayer) {
-                    _eventWaitingForPlayers.postValue(response)
-                }*/
             }
         } catch (exception: Exception) {
             Log.i("WebSocket", "error websocket")
