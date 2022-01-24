@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.spacedim.databinding.FragmentLoseBinding
 import com.example.spacedim.databinding.FragmentWinBinding
 
 
 class lose : Fragment() {
+    private val wsViewModel: WSViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,7 +27,11 @@ class lose : Fragment() {
             view.findNavController().navigate(R.id.action_lose_to_mainPage)
         }
         setHasOptionsMenu(true)
-
+        var elScore : TextView = binding.loseFinalScore
+        wsViewModel.listener.eventGameEnded.observe(viewLifecycleOwner,{gameEnded ->
+            var scoreText : TextView =elScore.findViewById(R.id.loseFinalScore)
+            scoreText.text = gameEnded.score.toString()
+        })
         Log.i("Lose", "onCreateView called")
         return binding.root
     }

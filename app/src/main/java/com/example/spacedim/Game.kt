@@ -1,6 +1,8 @@
 package com.example.spacedim
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,11 +13,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.gridlayout.widget.GridLayout
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.spacedim.databinding.FragmentGameBinding
 import com.example.spacedim.databinding.FragmentMainPageBinding
 import com.example.spacedim.modele.Event
 import com.example.spacedim.modele.UIElement
 import com.example.spacedim.modele.UIType
+import java.util.*
 
 
 class Game : Fragment() {
@@ -45,19 +49,37 @@ class Game : Fragment() {
         wsViewModel.listener.eventGameStarted.observe(viewLifecycleOwner, { gameStarted ->
             createButton(gameStarted.uiElementList , binding)
         })
+            var elLayout : TextView = binding.mission
+            var elProgressBar : ProgressBar = binding.progressBar
+        wsViewModel.listener.eventNextAction.observe(viewLifecycleOwner,{nextAction ->
+            var imageText : TextView=elLayout.findViewById(R.id.mission)
+            imageText.text = nextAction.action.sentence.toString()
+            var pBar : ProgressBar =elProgressBar.findViewById(R.id.progressBar)
+            pBar.progress = 0
+            ObjectAnimator.ofInt(elProgressBar,"progress",100).setDuration(nextAction.action.time).start()
+        })
+
+
+        wsViewModel.listener.eventGameEnded.observe(viewLifecycleOwner,{gameEnded ->
+            if (gameEnded.win == false)
+                view?.findNavController()?.navigate(R.id.action_game_to_lose)
+            if (gameEnded.win == true)
+                view?.findNavController()?.navigate(R.id.action_game_to_win)
+
+        })
+
+        wsViewModel.listener.eventNextLevel.observe(viewLifecycleOwner, { nextLevel ->
+            createButton(nextLevel.uiElementList , binding)
+        })
 
         Log.i("game", "onCreateView called")
         return binding.root
     }
 
     private fun createButton(elementsList : List<UIElement>, binding: FragmentGameBinding) {
-
+        var grid: GridLayout = binding.gameGridLayout
+        grid.removeAllViews()
         elementsList.forEach {
-
-
-            var grid: GridLayout = binding.gameGridLayout
-
-
             when (it.uiType) {
                 UIType.BUTTON -> {
                     /*val viewButton = layoutInflater.inflate(R.layout.fragment_game1, grid, false)
@@ -70,6 +92,8 @@ class Game : Fragment() {
                         // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
                     }
                     grid.addView(viewButton)*/
+
+                    Log.i("gameTest", it.toString())
 
                     val viewButton = layoutInflater.inflate(R.layout.fragment_game3, grid, false)
                     val image: ImageView = viewButton.findViewById(R.id.button_image)
@@ -86,20 +110,19 @@ class Game : Fragment() {
 
                     image.setOnClickListener { view: View ->
                         wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
-                        Log.i("gameTest", it.toString())
-                        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                        //Log.i("gameTest", it.toString())
                     }
                     grid.addView(viewButton)
                 }
 
                 UIType.SWITCH -> {
+                    Log.i("gameTest", it.toString())
                     val viewSwitch = layoutInflater.inflate(R.layout.fragment_game2, grid, false)
                     val switch : Switch = viewSwitch.findViewById(R.id.switch_action)
                     switch.text = it.content
                     switch.setOnClickListener{ view : View ->
                         wsViewModel.ws.send(PolymoObject.adapter.toJson(Event.PlayerAction(it)))
-                        Log.i("gameTest", it.toString())
-                        // Timber.i(PolymoObject.adapterSpace.toJson(Event.PlayerAction(it)))
+                        //Log.i("gameTest", it.toString())
                     }
                     grid.addView(viewSwitch)
                 }
